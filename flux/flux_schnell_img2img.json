@@ -1,7 +1,7 @@
 {
   "1": {
     "inputs": {
-      "clip_name1": "t5xxl_fp8_e4m3fn.safetensors",
+      "clip_name1": "t5xxl_fp8_e4m3fn_scaled.safetensors",
       "clip_name2": "clip_l.safetensors",
       "type": "flux"
     },
@@ -43,7 +43,7 @@
       "proxies": "",
       "auth_data": "",
       "service": "GoogleTranslator",
-      "text": "绿色双马尾的猫耳娘在樱花树下哭",
+      "text": "绿色双马尾的猫耳娘在樱花树下睡觉",
       "Show proxy": "proxy_hide",
       "Show authorization": "authorization_hide",
       "clip": ["1", 0]
@@ -54,7 +54,7 @@
     "inputs": {
       "scheduler": "simple",
       "steps": 4,
-      "denoise": 0.8,
+      "denoise": 0.7,
       "model": ["2", 0]
     },
     "class_type": "BasicScheduler"

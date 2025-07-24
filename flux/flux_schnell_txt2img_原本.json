@@ -1,10 +1,9 @@
 {
   "1": {
     "inputs": {
-      "clip_name1": "clip_l.safetensors",
-      "clip_name2": "t5xxl_fp8_e4m3fn_scaled.safetensors",
-      "type": "flux",
-      "device": "default"
+      "clip_name1": "t5xxl_fp8_e4m3fn_scaled.safetensors",
+      "clip_name2": "clip_l.safetensors",
+      "type": "flux"
     },
     "class_type": "DualCLIPLoader"
   },
@@ -17,19 +16,31 @@
   },
   "3": {
     "inputs": {
+      "sampler_name": "euler"
+    },
+    "class_type": "KSamplerSelect"
+  },
+  "4": {
+    "inputs": {
+      "noise_seed": 123456789
+    },
+    "class_type": "RandomNoise"
+  },
+  "5": {
+    "inputs": {
       "vae_name": "ae.safetensors"
     },
     "class_type": "VAELoader"
   },
-  "4": {
+  "6": {
     "inputs": {
       "width": 1024,
       "height": 1024,
       "batch_size": 1
     },
-    "class_type": "EmptySD3LatentImage"
+    "class_type": "EmptyLatentImage"
   },
-  "5": {
+  "7": {
     "inputs": {
       "from_translate": "auto",
       "to_translate": "english",
@@ -44,33 +55,46 @@
     },
     "class_type": "DeepTranslatorCLIPTextEncodeNode"
   },
-  "6": {
+  "8": {
     "inputs": {
-      "seed": 123456789,
-      "steps": 4,
-      "cfg": 1,
-      "sampler_name": "euler",
       "scheduler": "simple",
+      "steps": 4,
       "denoise": 1,
-      "model": ["2", 0],
-      "positive": ["5", 0],
-      "negative": ["5", 0],
-      "latent_image": ["4", 0]
+      "model": ["2", 0]
     },
-    "class_type": "KSampler"
+    "class_type": "BasicScheduler"
   },
-  "7": {
+  "9": {
     "inputs": {
-      "samples": ["6", 0],
-      "vae": ["3", 0]
+      "model": ["2", 0],
+      "conditioning": ["7", 0]
+    },
+    "class_type": "BasicGuider"
+  },
+  "10": {
+    "inputs": {
+      "noise": ["4", 0],
+      "guider": ["9", 0],
+      "sampler": ["3", 0],
+      "sigmas": ["8", 0],
+      "latent_image": ["6", 0]
+    },
+    "class_type": "SamplerCustomAdvanced"
+  },
+  "11": {
+    "inputs": {
+      "samples": ["10", 0],
+      "vae": ["5", 0]
     },
     "class_type": "VAEDecode"
   },
-  "8": {
+  "12": {
     "inputs": {
       "filename_prefix": "flux",
-      "images": ["7", 0]
+      "file_type": "JPEG",
+      "remove_metadata": false,
+      "images": ["11", 0]
     },
-    "class_type": "SaveImage"
+    "class_type": "SaveImagePlus"
   }
 }

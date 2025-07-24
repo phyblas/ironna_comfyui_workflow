@@ -2,8 +2,6 @@
 
 用flux来做图生图。
 
-不必须安装更多插件，但需要先把comfyui更新为最新版。
-
 # 需要插件
 
 - [AlekPet / ComfyUI_Custom_Nodes_AlekPet](https://github.com/AlekPet/ComfyUI_Custom_Nodes_AlekPet)
@@ -15,8 +13,11 @@
 # 需要模型
 
 ### unet
-- [flux1-schnell](https://huggingface.co/black-forest-labs/FLUX.1-schnell/blob/main/flux1-schnell.safetensors)
+- [flux1-schnell](https://huggingface.co/black-forest-labs/FLUX.1-schnell/blob/main)
 
 ### clip_vision
 - [clip_l](https://huggingface.co/comfyanonymous/flux_text_encoders/blob/main/clip_l.safetensors)
-- [t5xxl_fp8_e4m3fn](https://huggingface.co/comfyanonymous/flux_text_encoders/blob/main/t5xxl_fp8_e4m3fn.safetensors)
+- [t5xxl_fp8_e4m3fn](https://huggingface.co/comfyanonymous/flux_text_encoders/blob/main/t5xxl_fp8_e4m3fn_scaled.safetensors)
+
+### vae
+- [ae](https://huggingface.co/Comfy-Org/Lumina_Image_2.0_Repackaged/blob/main/split_files/vae/ae.safetensors)

@@ -1,14 +1,11 @@
 # 简单说明
 
-用flux来做内补。但结果看来不是很好。
+基于[comfyui官方的工作流](https://comfyanonymous.github.io/ComfyUI_examples/flux/#flux-schnell)。需要unet和2个CLIP模型和vae。
 
 # 需要插件
 
 - [AlekPet / ComfyUI_Custom_Nodes_AlekPet](https://github.com/AlekPet/ComfyUI_Custom_Nodes_AlekPet)
 - - DeepTranslatorCLIPTextEncodeNode
-
-- [cubiq / ComfyUI_essentials](https://github.com/cubiq/ComfyUI_essentials)
-- - MaskBlur+
 
 - [Goktug / comfyui-saveimage-plus](https://github.com/Goktug/comfyui-saveimage-plus)
 - - SaveImagePlus
