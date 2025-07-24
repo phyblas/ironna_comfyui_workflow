@@ -1,0 +1,97 @@
+{
+  "1": {
+    "inputs": {
+      "unet_name": "flux1-fill-dev.safetensors",
+      "weight_dtype": "default"
+    },
+    "class_type": "UNETLoader"
+  },
+  "2": {
+    "inputs": {
+      "clip_name1": "clip_l.safetensors",
+      "clip_name2": "t5xxl_fp8_e4m3fn_scaled.safetensors",
+      "type": "flux",
+      "device": "default"
+    },
+    "class_type": "DualCLIPLoader"
+  },
+  "3": {
+    "inputs": {
+      "vae_name": "ae.safetensors"
+    },
+    "class_type": "VAELoader"
+  },
+  "4": {
+    "class_type": "LoadImage"
+  },
+  "5": {
+    "inputs": {
+      "model": ["1", 0]
+    },
+    "class_type": "DifferentialDiffusion"
+  },
+  "6": {
+    "inputs": {
+      "from_translate": "auto",
+      "to_translate": "english",
+      "add_proxies": false,
+      "proxies": "",
+      "auth_data": "",
+      "service": "GoogleTranslator",
+      "text": "生气的少女",
+      "Show proxy": "proxy_hide",
+      "Show authorization": "authorization_hide",
+      "clip": ["2", 0]
+    },
+    "class_type": "DeepTranslatorCLIPTextEncodeNode"
+  },
+  "7": {
+    "inputs": {
+      "guidance": 30,
+      "conditioning": ["6", 0]
+    },
+    "class_type": "FluxGuidance"
+  },
+  "8": {
+    "inputs": {
+      "noise_mask": false,
+      "positive": ["7", 0],
+      "negative": ["6", 0],
+      "vae": ["3", 0],
+      "pixels": ["4", 0],
+      "mask": ["4", 1]
+    },
+    "class_type": "InpaintModelConditioning"
+  },
+  "9": {
+    "inputs": {
+      "seed": 123456789,
+      "steps": 20,
+      "cfg": 1,
+      "sampler_name": "euler",
+      "scheduler": "normal",
+      "denoise": 1,
+      "model": ["5", 0],
+      "positive": ["8", 0],
+      "negative": ["8", 1],
+      "latent_image": ["8", 2]
+    },
+    "class_type": "KSampler"
+  },
+  "10": {
+    "inputs": {
+      "samples": ["9", 0],
+      "vae": ["3", 0]
+    },
+    "class_type": "VAEDecode"
+  },
+  "11": {
+    "inputs": {
+      "filename_prefix": "flux",
+      "file_type": "JPEG",
+      "remove_metadata": false,
+      "images": ["10", 0]
+    },
+    "class_type": "SaveImagePlus"
+  }
+}

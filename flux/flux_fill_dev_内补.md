@@ -1,6 +1,6 @@
 # 简单说明
 
-基于[comfyui官方的工作流](https://comfyanonymous.github.io/ComfyUI_examples/flux/#flux-schnell)。需要unet和2个CLIP模型和vae。
+用flux来做内补。基于[comfyui官方的工作流](https://comfyanonymous.github.io/ComfyUI_examples/flux/#fill-inpainting-model)。
 
 # 需要插件
 
@@ -13,7 +13,7 @@
 # 需要模型
 
 ### unet
-- [flux1-schnell](https://huggingface.co/black-forest-labs/FLUX.1-schnell/blob/main)
+- [flux1-fill-dev](https://huggingface.co/black-forest-labs/FLUX.1-Fill-dev/tree/main)
 
 ### clip_vision
 - [clip_l](https://huggingface.co/comfyanonymous/flux_text_encoders/blob/main/clip_l.safetensors)
