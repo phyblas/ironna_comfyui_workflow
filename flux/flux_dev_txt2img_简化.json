@@ -1,7 +1,7 @@
 {
   "1": {
     "inputs": {
-      "ckpt_name": "flux1-schnell-fp8.safetensors"
+      "ckpt_name": "flux1-dev-fp8.safetensors"
     },
     "class_type": "CheckpointLoaderSimple"
   },
@@ -21,7 +21,7 @@
       "proxies": "",
       "auth_data": "",
       "service": "GoogleTranslator",
-      "text": "绿色双马尾的猫耳娘在樱花树下吃水果",
+      "text": "绿色双马尾的猫耳娘在樱花树下吃饭",
       "Show proxy": "proxy_hide",
       "Show authorization": "authorization_hide",
       "clip": ["1", 1]
@@ -30,32 +30,39 @@
   },
   "4": {
     "inputs": {
+      "guidance": 3.5,
+      "conditioning": ["3", 0]
+    },
+    "class_type": "FluxGuidance"
+  },
+  "5": {
+    "inputs": {
       "seed": 123456789,
-      "steps": 4,
+      "steps": 20,
       "cfg": 1,
       "sampler_name": "euler",
       "scheduler": "simple",
       "denoise": 1,
       "model": ["1", 0],
-      "positive": ["3", 0],
+      "positive": ["4", 0],
       "negative": ["3", 0],
       "latent_image": ["2", 0]
     },
     "class_type": "KSampler"
   },
-  "5": {
+  "6": {
     "inputs": {
-      "samples": ["4", 0],
+      "samples": ["5", 0],
       "vae": ["1", 2]
     },
     "class_type": "VAEDecode"
   },
-  "6": {
+  "7": {
     "inputs": {
       "filename_prefix": "flux",
       "file_type": "JPEG",
       "remove_metadata": false,
-      "images": ["5", 0]
+      "images": ["6", 0]
     },
     "class_type": "SaveImagePlus"
   }

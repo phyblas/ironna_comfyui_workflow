@@ -1,11 +1,27 @@
 {
   "1": {
     "inputs": {
-      "ckpt_name": "flux1-schnell-fp8.safetensors"
+      "clip_name1": "clip_l.safetensors",
+      "clip_name2": "t5xxl_fp8_e4m3fn_scaled.safetensors",
+      "type": "flux",
+      "device": "default"
     },
-    "class_type": "CheckpointLoaderSimple"
+    "class_type": "DualCLIPLoader"
   },
   "2": {
+    "inputs": {
+      "unet_name": "flux1-schnell.safetensors",
+      "weight_dtype": "default"
+    },
+    "class_type": "UNETLoader"
+  },
+  "3": {
+    "inputs": {
+      "vae_name": "ae.safetensors"
+    },
+    "class_type": "VAELoader"
+  },
+  "4": {
     "inputs": {
       "width": 1024,
       "height": 1024,
@@ -13,7 +29,7 @@
     },
     "class_type": "EmptySD3LatentImage"
   },
-  "3": {
+  "5": {
     "inputs": {
       "from_translate": "auto",
       "to_translate": "english",
@@ -21,14 +37,14 @@
       "proxies": "",
       "auth_data": "",
       "service": "GoogleTranslator",
-      "text": "绿色双马尾的猫耳娘在樱花树下吃水果",
+      "text": "绿色双马尾的猫耳娘在樱花树下吃面包",
       "Show proxy": "proxy_hide",
       "Show authorization": "authorization_hide",
-      "clip": ["1", 1]
+      "clip": ["1", 0]
     },
     "class_type": "DeepTranslatorCLIPTextEncodeNode"
   },
-  "4": {
+  "6": {
     "inputs": {
       "seed": 123456789,
       "steps": 4,
@@ -36,27 +52,25 @@
       "sampler_name": "euler",
       "scheduler": "simple",
       "denoise": 1,
-      "model": ["1", 0],
-      "positive": ["3", 0],
-      "negative": ["3", 0],
-      "latent_image": ["2", 0]
+      "model": ["2", 0],
+      "positive": ["5", 0],
+      "negative": ["5", 0],
+      "latent_image": ["4", 0]
     },
     "class_type": "KSampler"
   },
-  "5": {
+  "7": {
     "inputs": {
-      "samples": ["4", 0],
-      "vae": ["1", 2]
+      "samples": ["6", 0],
+      "vae": ["3", 0]
     },
     "class_type": "VAEDecode"
   },
-  "6": {
+  "8": {
     "inputs": {
       "filename_prefix": "flux",
-      "file_type": "JPEG",
-      "remove_metadata": false,
-      "images": ["5", 0]
+      "images": ["7", 0]
     },
-    "class_type": "SaveImagePlus"
+    "class_type": "SaveImage"
   }
 }

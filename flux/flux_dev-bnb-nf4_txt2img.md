@@ -2,8 +2,6 @@
 
 通过[张吕敏](https://huggingface.co/lllyasviel)提出的nf4和[CheckpointLoaderNF4节点](https://github.com/comfyanonymous/ComfyUI_bitsandbytes_NF4)来用flux来做文生图。
 
-不必须安装更多插件，但需要先把comfyui更新为最新（2024年8月中旬）版本。
-
 # 需要插件
 
 - [AlekPet / ComfyUI_Custom_Nodes_AlekPet](https://github.com/AlekPet/ComfyUI_Custom_Nodes_AlekPet)
