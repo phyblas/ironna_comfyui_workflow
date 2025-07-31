@@ -1,7 +1,7 @@
 {
   "1": {
     "inputs": {
-      "unet_name": "flux1-fill-dev.safetensors",
+      "unet_name": "flux1-fill-dev-fp8.safetensors",
       "weight_dtype": "default"
     },
     "class_type": "UNETLoader"
@@ -26,12 +26,6 @@
   },
   "5": {
     "inputs": {
-      "model": ["1", 0]
-    },
-    "class_type": "DifferentialDiffusion"
-  },
-  "6": {
-    "inputs": {
       "from_translate": "auto",
       "to_translate": "english",
       "add_proxies": false,
@@ -45,25 +39,25 @@
     },
     "class_type": "DeepTranslatorCLIPTextEncodeNode"
   },
-  "7": {
+  "6": {
     "inputs": {
       "guidance": 30,
-      "conditioning": ["6", 0]
+      "conditioning": ["5", 0]
     },
     "class_type": "FluxGuidance"
   },
-  "8": {
+  "7": {
     "inputs": {
       "noise_mask": false,
-      "positive": ["7", 0],
-      "negative": ["6", 0],
+      "positive": ["6", 0],
+      "negative": ["5", 0],
       "vae": ["3", 0],
       "pixels": ["4", 0],
       "mask": ["4", 1]
     },
     "class_type": "InpaintModelConditioning"
   },
-  "9": {
+  "8": {
     "inputs": {
       "seed": 123456789,
       "steps": 20,
@@ -71,26 +65,26 @@
       "sampler_name": "euler",
       "scheduler": "normal",
       "denoise": 1,
-      "model": ["5", 0],
-      "positive": ["8", 0],
-      "negative": ["8", 1],
-      "latent_image": ["8", 2]
+      "model": ["1", 0],
+      "positive": ["7", 0],
+      "negative": ["7", 1],
+      "latent_image": ["7", 2]
     },
     "class_type": "KSampler"
   },
-  "10": {
+  "9": {
     "inputs": {
-      "samples": ["9", 0],
+      "samples": ["8", 0],
       "vae": ["3", 0]
     },
     "class_type": "VAEDecode"
   },
-  "11": {
+  "10": {
     "inputs": {
-      "filename_prefix": "flux",
+      "filename_prefix": "comflux",
       "file_type": "JPEG",
       "remove_metadata": false,
-      "images": ["10", 0]
+      "images": ["9", 0]
     },
     "class_type": "SaveImagePlus"
   }

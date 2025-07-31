@@ -9,7 +9,7 @@
   },
   "2": {
     "inputs": {
-      "unet_name": "flux1-schnell.safetensors",
+      "unet_name": "flux1-schnell-fp8-e4m3fn.safetensors",
       "weight_dtype": "default"
     },
     "class_type": "UNETLoader"
@@ -90,7 +90,7 @@
   },
   "12": {
     "inputs": {
-      "filename_prefix": "flux",
+      "filename_prefix": "comflux",
       "file_type": "JPEG",
       "remove_metadata": false,
       "images": ["11", 0]

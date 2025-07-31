@@ -13,6 +13,10 @@
 # 需要模型
 
 ### unet
+fp8的缩小模型
+- [flux1-schnell-fp8-e4m3fn](https://huggingface.co/Kijai/flux-fp8/blob/main/flux1-schnell-fp8-e4m3fn.safetensors)
+
+fp16的原本模型
 - [flux1-schnell](https://huggingface.co/black-forest-labs/FLUX.1-schnell/blob/main)
 
 ### clip_vision

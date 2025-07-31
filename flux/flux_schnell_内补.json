@@ -107,7 +107,7 @@
   },
   "15": {
     "inputs": {
-      "filename_prefix": "flux",
+      "filename_prefix": "comflux",
       "file_type": "JPEG",
       "remove_metadata": false,
       "images": ["14", 0]
