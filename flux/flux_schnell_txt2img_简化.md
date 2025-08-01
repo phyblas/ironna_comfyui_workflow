@@ -1,6 +1,6 @@
 # 简单说明
 
-基于[comfyui官方的工作流](https://comfyanonymous.github.io/ComfyUI_examples/flux/#flux-schnell-1)。只要下载一个个别为comfyui用的合成checkpoint模型就好。
+基于[comfyui官方的简化版的工作流](https://comfyanonymous.github.io/ComfyUI_examples/flux/#flux-schnell-1)。只要下载一个个别为comfyui用的合成checkpoint模型就好。
 
 # 需要插件
 

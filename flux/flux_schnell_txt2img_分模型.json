@@ -17,31 +17,19 @@
   },
   "3": {
     "inputs": {
-      "sampler_name": "euler"
-    },
-    "class_type": "KSamplerSelect"
-  },
-  "4": {
-    "inputs": {
-      "noise_seed": 123456789
-    },
-    "class_type": "RandomNoise"
-  },
-  "5": {
-    "inputs": {
       "vae_name": "ae.safetensors"
     },
     "class_type": "VAELoader"
   },
-  "6": {
+  "4": {
     "inputs": {
       "width": 1024,
       "height": 1024,
       "batch_size": 1
     },
-    "class_type": "EmptyLatentImage"
+    "class_type": "EmptySD3LatentImage"
   },
-  "7": {
+  "5": {
     "inputs": {
       "from_translate": "auto",
       "to_translate": "english",
@@ -56,45 +44,34 @@
     },
     "class_type": "DeepTranslatorCLIPTextEncodeNode"
   },
-  "8": {
+  "6": {
     "inputs": {
-      "scheduler": "simple",
+      "seed": 123456789,
       "steps": 4,
+      "cfg": 1,
+      "sampler_name": "euler",
+      "scheduler": "simple",
       "denoise": 1,
-      "model": ["2", 0]
-    },
-    "class_type": "BasicScheduler"
-  },
-  "9": {
-    "inputs": {
       "model": ["2", 0],
-      "conditioning": ["7", 0]
+      "positive": ["5", 0],
+      "negative": ["5", 0],
+      "latent_image": ["4", 0]
     },
-    "class_type": "BasicGuider"
+    "class_type": "KSampler"
   },
-  "10": {
+  "7": {
     "inputs": {
-      "noise": ["4", 0],
-      "guider": ["9", 0],
-      "sampler": ["3", 0],
-      "sigmas": ["8", 0],
-      "latent_image": ["6", 0]
-    },
-    "class_type": "SamplerCustomAdvanced"
-  },
-  "11": {
-    "inputs": {
-      "samples": ["10", 0],
-      "vae": ["5", 0]
+      "samples": ["6", 0],
+      "vae": ["3", 0]
     },
     "class_type": "VAEDecode"
   },
-  "12": {
+  "8": {
     "inputs": {
       "filename_prefix": "comflux",
       "file_type": "JPEG",
       "remove_metadata": false,
-      "images": ["11", 0]
+      "images": ["7", 0]
     },
     "class_type": "SaveImagePlus"
   }

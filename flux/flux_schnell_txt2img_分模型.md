@@ -1,6 +1,6 @@
 # 简单说明
 
-基于[comfyui官方的原本的工作流](https://comfyanonymous.github.io/ComfyUI_examples/flux/#flux-schnell)。有点复杂。需要unet和2个CLIP模型和vae。
+基于[comfyui官方的简化版的工作流](https://comfyanonymous.github.io/ComfyUI_examples/flux/#flux-schnell-1)。但分unet和CLIP和vae的模型。
 
 # 需要插件
 
