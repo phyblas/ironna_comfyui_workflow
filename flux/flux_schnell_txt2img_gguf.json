@@ -1,0 +1,76 @@
+{
+  "1": {
+    "inputs": {
+      "clip_name1": "clip_l.safetensors",
+      "clip_name2": "t5-v1_1-xxl-encoder-Q4_K_S.gguf",
+      "type": "flux"
+    },
+    "class_type": "DualCLIPLoaderGGUF"
+  },
+  "2": {
+    "inputs": {
+      "unet_name": "flux1-schnell-Q4_K_S.gguf"
+    },
+    "class_type": "UnetLoaderGGUF"
+  },
+  "3": {
+    "inputs": {
+      "vae_name": "ae.safetensors"
+    },
+    "class_type": "VAELoader"
+  },
+  "4": {
+    "inputs": {
+      "width": 1024,
+      "height": 1024,
+      "batch_size": 1
+    },
+    "class_type": "EmptySD3LatentImage"
+  },
+  "5": {
+    "inputs": {
+      "from_translate": "auto",
+      "to_translate": "english",
+      "add_proxies": false,
+      "proxies": "",
+      "auth_data": "",
+      "service": "GoogleTranslator",
+      "text": "绿色双马尾的猫耳娘在樱花树下吃面包",
+      "Show proxy": "proxy_hide",
+      "Show authorization": "authorization_hide",
+      "clip": ["1", 0]
+    },
+    "class_type": "DeepTranslatorCLIPTextEncodeNode"
+  },
+  "6": {
+    "inputs": {
+      "seed": 123456789,
+      "steps": 4,
+      "cfg": 1,
+      "sampler_name": "euler",
+      "scheduler": "simple",
+      "denoise": 1,
+      "model": ["2", 0],
+      "positive": ["5", 0],
+      "negative": ["5", 0],
+      "latent_image": ["4", 0]
+    },
+    "class_type": "KSampler"
+  },
+  "7": {
+    "inputs": {
+      "samples": ["6", 0],
+      "vae": ["3", 0]
+    },
+    "class_type": "VAEDecode"
+  },
+  "8": {
+    "inputs": {
+      "filename_prefix": "comflux",
+      "file_type": "JPEG",
+      "remove_metadata": false,
+      "images": ["7", 0]
+    },
+    "class_type": "SaveImagePlus"
+  }
+}
