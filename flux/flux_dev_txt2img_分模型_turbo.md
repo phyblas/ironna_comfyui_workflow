@@ -13,7 +13,7 @@
 # 需要模型
 
 ### checkpoint
-fp8的缩小模型
+fp8的量化模型
 - [flux1-dev-fp8](https://huggingface.co/Kijai/flux-fp8/blob/main/flux1-dev-fp8.safetensors)
 
 fp16的原本模型

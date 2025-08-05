@@ -1,6 +1,6 @@
 # 简单说明
 
-基于[comfyui官方的原本的工作流](https://comfyanonymous.github.io/ComfyUI_examples/flux/#flux-schnell)。有点复杂。需要unet和2个CLIP模型和vae。
+用flux kontext dev来修改1张图片。
 
 # 需要插件
 
@@ -14,10 +14,10 @@
 
 ### unet
 fp8的量化模型
-- [flux1-schnell-fp8-e4m3fn](https://huggingface.co/Kijai/flux-fp8/blob/main/flux1-schnell-fp8-e4m3fn.safetensors)
+- [flux1-dev-kontext_fp8_scaled](https://huggingface.co/Comfy-Org/flux1-kontext-dev_ComfyUI/blob/main/split_files/diffusion_models/flux1-dev-kontext_fp8_scaled.safetensors)
 
 fp16的原本模型
-- [flux1-schnell](https://huggingface.co/black-forest-labs/FLUX.1-schnell/tree/main)
+- [flux1-kontext-dev](https://huggingface.co/black-forest-labs/FLUX.1-Kontext-dev/tree/main)
 
 ### clip_vision
 - [clip_l](https://huggingface.co/comfyanonymous/flux_text_encoders/blob/main/clip_l.safetensors)

@@ -13,7 +13,7 @@
 # 需要模型
 
 ### unet
-fp8的缩小模型
+fp8的量化模型
 - [flux1-fill-dev-fp8](https://huggingface.co/boricuapab/flux1-fill-dev-fp8)
 
 fp16的原本模型

@@ -1,0 +1,122 @@
+{
+  "1": {
+    "inputs": {
+      "unet_name": "flux1-dev-kontext_fp8_scaled.safetensors",
+      "weight_dtype": "default"
+    },
+    "class_type": "UNETLoader"
+  },
+  "2": {
+    "inputs": {
+      "clip_name1": "clip_l.safetensors",
+      "clip_name2": "t5xxl_fp8_e4m3fn_scaled.safetensors",
+      "type": "flux",
+      "device": "default"
+    },
+    "class_type": "DualCLIPLoader"
+  },
+  "3": {
+    "inputs": {
+      "vae_name": "ae.safetensors"
+    },
+    "class_type": "VAELoader"
+  },
+  "4": {
+    "inputs": {
+      "width": 1328,
+      "height": 800,
+      "batch_size": 1
+    },
+    "class_type": "EmptyLatentImage"
+  },
+  "5": {
+    "class_type": "LoadImage"
+  },
+  "6": {
+    "class_type": "LoadImage"
+  },
+  "7": {
+    "inputs": {
+      "from_translate": "auto",
+      "to_translate": "english",
+      "add_proxies": false,
+      "proxies": "",
+      "auth_data": "",
+      "service": "GoogleTranslator",
+      "text": "2个女孩互相拥抱",
+      "Show proxy": "proxy_hide",
+      "Show authorization": "authorization_hide",
+      "clip": ["2", 0]
+    },
+    "class_type": "DeepTranslatorCLIPTextEncodeNode"
+  },
+  "8": {
+    "inputs": {
+      "direction": "right",
+      "match_image_size": true,
+      "spacing_width": 0,
+      "spacing_color": "white",
+      "image1": ["5", 0],
+      "image2": ["6", 0]
+    },
+    "class_type": "ImageStitch"
+  },
+  "9": {
+    "inputs": {
+      "image": ["8", 0]
+    },
+    "class_type": "FluxKontextImageScale"
+  },
+  "10": {
+    "inputs": {
+      "pixels": ["9", 0],
+      "vae": ["3", 0]
+    },
+    "class_type": "VAEEncode"
+  },
+  "11": {
+    "inputs": {
+      "conditioning": ["7", 0],
+      "latent": ["10", 0]
+    },
+    "class_type": "ReferenceLatent"
+  },
+  "12": {
+    "inputs": {
+      "guidance": 2.5,
+      "conditioning": ["11", 0]
+    },
+    "class_type": "FluxGuidance"
+  },
+  "13": {
+    "inputs": {
+      "seed": 123456789,
+      "steps": 20,
+      "cfg": 1,
+      "sampler_name": "euler",
+      "scheduler": "simple",
+      "denoise": 1,
+      "model": ["1", 0],
+      "positive": ["12", 0],
+      "negative": ["7", 0],
+      "latent_image": ["4", 0]
+    },
+    "class_type": "KSampler"
+  },
+  "14": {
+    "inputs": {
+      "samples": ["13", 0],
+      "vae": ["3", 0]
+    },
+    "class_type": "VAEDecode"
+  },
+  "15": {
+    "inputs": {
+      "filename_prefix": "kontext",
+      "file_type": "JPEG",
+      "remove_metadata": false,
+      "images": ["14", 0]
+    },
+    "class_type": "SaveImagePlus"
+  }
+}
