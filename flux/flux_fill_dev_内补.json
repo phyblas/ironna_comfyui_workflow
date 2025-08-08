@@ -32,7 +32,7 @@
       "proxies": "",
       "auth_data": "",
       "service": "GoogleTranslator",
-      "text": "生气的少女",
+      "text": "微笑",
       "Show proxy": "proxy_hide",
       "Show authorization": "authorization_hide",
       "clip": ["2", 0]
@@ -41,15 +41,29 @@
   },
   "6": {
     "inputs": {
+      "expand": 3,
+      "incremental_expandrate": 0,
+      "tapered_corners": true,
+      "flip_input": false,
+      "blur_radius": 2,
+      "lerp_alpha": 1,
+      "decay_factor": 1,
+      "fill_holes": false,
+      "mask": ["4", 1]
+    },
+    "class_type": "GrowMaskWithBlur"
+  },
+  "7": {
+    "inputs": {
       "guidance": 30,
       "conditioning": ["5", 0]
     },
     "class_type": "FluxGuidance"
   },
-  "7": {
+  "8": {
     "inputs": {
       "noise_mask": false,
-      "positive": ["6", 0],
+      "positive": ["7", 0],
       "negative": ["5", 0],
       "vae": ["3", 0],
       "pixels": ["4", 0],
@@ -57,7 +71,7 @@
     },
     "class_type": "InpaintModelConditioning"
   },
-  "8": {
+  "9": {
     "inputs": {
       "seed": 123456789,
       "steps": 20,
@@ -66,25 +80,36 @@
       "scheduler": "normal",
       "denoise": 1,
       "model": ["1", 0],
-      "positive": ["7", 0],
-      "negative": ["7", 1],
-      "latent_image": ["7", 2]
+      "positive": ["8", 0],
+      "negative": ["8", 1],
+      "latent_image": ["8", 2]
     },
     "class_type": "KSampler"
   },
-  "9": {
+  "10": {
     "inputs": {
-      "samples": ["8", 0],
+      "samples": ["9", 0],
       "vae": ["3", 0]
     },
     "class_type": "VAEDecode"
   },
-  "10": {
+  "11": {
+    "inputs": {
+      "x": 0,
+      "y": 0,
+      "resize_source": false,
+      "destination": ["4", 0],
+      "source": ["10", 0],
+      "mask": ["6", 0]
+    },
+    "class_type": "ImageCompositeMasked"
+  },
+  "12": {
     "inputs": {
       "filename_prefix": "comflux",
       "file_type": "JPEG",
       "remove_metadata": false,
-      "images": ["9", 0]
+      "images": ["11", 0]
     },
     "class_type": "SaveImagePlus"
   }

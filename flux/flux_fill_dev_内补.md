@@ -1,11 +1,14 @@
 # 简单说明
 
-用flux来做内补。基于[comfyui官方的工作流](https://comfyanonymous.github.io/ComfyUI_examples/flux/#fill-inpainting-model)。
+用flux来做内补。基于[comfyui官方的工作流](https://comfyanonymous.github.io/ComfyUI_examples/flux/#fill-inpainting-model)。还有用遮罩来合成来防止品质下降。
 
 # 需要插件
 
 - [AlekPet / ComfyUI_Custom_Nodes_AlekPet](https://github.com/AlekPet/ComfyUI_Custom_Nodes_AlekPet)
 - - DeepTranslatorCLIPTextEncodeNode
+
+- [kijai / ComfyUI-KJNodes][https://github.com/kijai/ComfyUI-KJNodes]
+- - GrowMaskWithBlur
 
 - [Goktug / comfyui-saveimage-plus](https://github.com/Goktug/comfyui-saveimage-plus)
 - - SaveImagePlus
