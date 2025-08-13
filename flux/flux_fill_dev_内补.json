@@ -106,7 +106,7 @@
   },
   "12": {
     "inputs": {
-      "filename_prefix": "comflux",
+      "filename_prefix": "comfffill",
       "file_type": "JPEG",
       "remove_metadata": false,
       "images": ["11", 0]
