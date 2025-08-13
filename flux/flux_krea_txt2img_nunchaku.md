@@ -15,5 +15,5 @@
 
 # 需要模型
 
-### checkpoint
+### unet
 - [svdq-fp4_r32-flux.1-krea-dev或svdq-int4_r32-flux.1-krea-dev](https://huggingface.co/nunchaku-tech/nunchaku-flux.1-krea-dev/tree/main)
