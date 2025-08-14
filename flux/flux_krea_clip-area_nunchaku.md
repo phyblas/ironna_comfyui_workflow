@@ -1,6 +1,6 @@
 # 简单说明
 
-用[flux krea dev](https://docs.comfy.org/tutorials/flux/flux1-krea-dev)模型。还有用nunchaku量化技术来加速生成过程。
+用条件采用区域来指定人物在场景中的位置。模型用[flux krea dev](https://docs.comfy.org/tutorials/flux/flux1-krea-dev)的nunchaku量化模型。
 
 # 需要插件
 
@@ -8,7 +8,13 @@
 - - NunchakuFluxDiTLoader
 
 - [AlekPet / ComfyUI_Custom_Nodes_AlekPet](https://github.com/AlekPet/ComfyUI_Custom_Nodes_AlekPet)
-- - DeepTranslatorCLIPTextEncodeNode
+- - DeepTranslatorTextNode
+
+- [TinyTerra / ComfyUI_tinyterraNodes](https://github.com/TinyTerra/ComfyUI_tinyterraNodes)
+- - ttN text
+
+- [Suzie1 / ComfyUI_Comfyroll_CustomNodes](https://github.com/Suzie1/ComfyUI_Comfyroll_CustomNodes)
+- - CR Text Concatenate
 
 - [Goktug / comfyui-saveimage-plus](https://github.com/Goktug/comfyui-saveimage-plus)
 - - SaveImagePlus
