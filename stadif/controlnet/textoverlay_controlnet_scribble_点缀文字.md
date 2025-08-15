@@ -15,9 +15,6 @@
 - [AlekPet / ComfyUI_Custom_Nodes_AlekPet](https://github.com/AlekPet/ComfyUI_Custom_Nodes_AlekPet)
 - - DeepTranslatorCLIPTextEncodeNode
 
-- [kijai / ComfyUI-KJNodes](https://github.com/kijai/ComfyUI-KJNodes)
-- - ImageConcanate
-
 - [Goktug / comfyui-saveimage-plus](https://github.com/Goktug/comfyui-saveimage-plus)
 - - SaveImagePlus
 

@@ -1,6 +1,6 @@
 # 简单说明
 
-用[flux krea dev](https://docs.comfy.org/tutorials/flux/flux1-krea-dev)模型和flux depth dev lora来从深度图生成。还有用nunchaku量化技术来加速生成过程。
+用textoverlay节点画文字，然后用flux depth dev lora把文字点缀为图片。还有用nunchaku量化技术来加速生成过程。
 
 # 需要插件
 
@@ -8,11 +8,14 @@
 - - NunchakuFluxDiTLoader
 - - NunchakuFluxLoraLoader
 
+- [WASasquatch / was-node-suite-comfyui](https://github.com/WASasquatch/was-node-suite-comfyui)
+- - Image Blank
+
+- [Munkyfoot / ComfyUI-TextOverlay](https://github.com/Munkyfoot/ComfyUI-TextOverlay)
+- - Text Overlay
+
 - [AlekPet / ComfyUI_Custom_Nodes_AlekPet](https://github.com/AlekPet/ComfyUI_Custom_Nodes_AlekPet)
 - - DeepTranslatorCLIPTextEncodeNode
-
-- [Fannovel16 / comfyui_controlnet_aux](https://github.com/Fannovel16/comfyui_controlnet_aux)
-- - DepthAnythingPreprocessor
 
 - [Goktug / comfyui-saveimage-plus](https://github.com/Goktug/comfyui-saveimage-plus)
 - - SaveImagePlus

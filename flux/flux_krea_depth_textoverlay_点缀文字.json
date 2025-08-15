@@ -1,0 +1,142 @@
+{
+  "1": {
+    "inputs": {
+      "clip_name1": "clip_l.safetensors",
+      "clip_name2": "t5xxl_fp8_e4m3fn_scaled.safetensors",
+      "type": "flux",
+      "device": "default"
+    },
+    "class_type": "DualCLIPLoader"
+  },
+  "2": {
+    "inputs": {
+      "model_path": "svdq-fp4_r32-flux.1-krea-dev.safetensors",
+      "cache_threshold": 0,
+      "attention": "nunchaku-fp16",
+      "cpu_offload": "auto",
+      "device_id": 0,
+      "data_type": "bfloat16",
+      "i2f_mode": "enabled"
+    },
+    "class_type": "NunchakuFluxDiTLoader"
+  },
+  "3": {
+    "inputs": {
+      "vae_name": "ae.safetensors"
+    },
+    "class_type": "VAELoader"
+  },
+  "4": {
+    "inputs": {
+      "width": 200,
+      "height": 200,
+      "red": 0,
+      "green": 0,
+      "blue": 0
+    },
+    "class_type": "Image Blank"
+  },
+  "5": {
+    "inputs": {
+      "lora_name": "flux1-depth-dev-lora.safetensors",
+      "lora_strength": 0.9500000000000002,
+      "model": ["2", 0]
+    },
+    "class_type": "NunchakuFluxLoraLoader"
+  },
+  "6": {
+    "inputs": {
+      "from_translate": "auto",
+      "to_translate": "english",
+      "add_proxies": false,
+      "proxies": "",
+      "auth_data": "",
+      "service": "GoogleTranslator",
+      "text": "樱花",
+      "Show false": "false_hide",
+      "clip": ["1", 0]
+    },
+    "class_type": "DeepTranslatorCLIPTextEncodeNode"
+  },
+  "7": {
+    "inputs": {
+      "text": "花",
+      "font_size": 80,
+      "font": "meiryoub.ttc",
+      "fill_color_hex": "#FFFFFF",
+      "stroke_color_hex": "#FFFFFF",
+      "stroke_thickness": 0,
+      "padding": 0,
+      "horizontal_alignment": "center",
+      "vertical_alignment": "middle",
+      "x_shift": 0,
+      "y_shift": -20,
+      "line_spacing": 3.2,
+      "image": ["4", 0]
+    },
+    "class_type": "Text Overlay"
+  },
+  "8": {
+    "inputs": {
+      "guidance": 10,
+      "conditioning": ["6", 0]
+    },
+    "class_type": "FluxGuidance"
+  },
+  "9": {
+    "inputs": {
+      "target_width": 1024,
+      "target_height": 1024,
+      "padding_color": "black",
+      "interpolation": "area",
+      "image": ["7", 0]
+    },
+    "class_type": "ResizeAndPadImage"
+  },
+  "10": {
+    "inputs": {
+      "positive": ["8", 0],
+      "negative": ["6", 0],
+      "vae": ["3", 0],
+      "pixels": ["9", 0]
+    },
+    "class_type": "InstructPixToPixConditioning"
+  },
+  "11": {
+    "inputs": {
+      "seed": 123456789,
+      "steps": 20,
+      "cfg": 1,
+      "sampler_name": "euler",
+      "scheduler": "normal",
+      "denoise": 1,
+      "model": ["5", 0],
+      "positive": ["10", 0],
+      "negative": ["10", 1],
+      "latent_image": ["10", 2]
+    },
+    "class_type": "KSampler"
+  },
+  "12": {
+    "inputs": {
+      "samples": ["11", 0],
+      "vae": ["3", 0]
+    },
+    "class_type": "VAEDecode"
+  },
+  "13": {
+    "inputs": {
+      "filename_prefix": "comflux",
+      "file_type": "JPEG",
+      "remove_metadata": false,
+      "images": ["12", 0]
+    },
+    "class_type": "SaveImagePlus"
+  },
+  "14": {
+    "inputs": {
+      "images": ["7", 0]
+    },
+    "class_type": "PreviewImage"
+  }
+}
