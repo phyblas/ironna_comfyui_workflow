@@ -1,0 +1,107 @@
+{
+  "1": {
+    "inputs": {
+      "model_path": "svdq-fp4_r32-flux.1-kontext-dev.safetensors",
+      "cache_threshold": 0,
+      "attention": "nunchaku-fp16",
+      "cpu_offload": "auto",
+      "device_id": 0,
+      "data_type": "bfloat16",
+      "i2f_mode": "enabled"
+    },
+    "class_type": "NunchakuFluxDiTLoader"
+  },
+  "2": {
+    "inputs": {
+      "clip_name1": "clip_l.safetensors",
+      "clip_name2": "t5xxl_fp8_e4m3fn_scaled.safetensors",
+      "type": "flux",
+      "device": "default"
+    },
+    "class_type": "DualCLIPLoader"
+  },
+  "3": {
+    "inputs": {
+      "vae_name": "ae.safetensors"
+    },
+    "class_type": "VAELoader"
+  },
+  "4": {
+    "inputs": {
+      "width": 1024,
+      "height": 1024,
+      "batch_size": 1
+    },
+    "class_type": "EmptyLatentImage"
+  },
+  "5": {
+    "class_type": "LoadImage"
+  },
+  "6": {
+    "inputs": {
+      "from_translate": "auto",
+      "to_translate": "english",
+      "add_proxies": false,
+      "proxies": "",
+      "auth_data": "",
+      "service": "GoogleTranslator",
+      "text": "转换为像素画风格",
+      "Show proxy": "proxy_hide",
+      "Show authorization": "authorization_hide",
+      "clip": ["2", 0]
+    },
+    "class_type": "DeepTranslatorCLIPTextEncodeNode"
+  },
+  "7": {
+    "inputs": {
+      "pixels": ["5", 0],
+      "vae": ["3", 0]
+    },
+    "class_type": "VAEEncode"
+  },
+  "8": {
+    "inputs": {
+      "conditioning": ["6", 0],
+      "latent": ["7", 0]
+    },
+    "class_type": "ReferenceLatent"
+  },
+  "9": {
+    "inputs": {
+      "guidance": 2.5,
+      "conditioning": ["8", 0]
+    },
+    "class_type": "FluxGuidance"
+  },
+  "10": {
+    "inputs": {
+      "seed": 123456789,
+      "steps": 20,
+      "cfg": 1,
+      "sampler_name": "euler",
+      "scheduler": "simple",
+      "denoise": 1,
+      "model": ["1", 0],
+      "positive": ["9", 0],
+      "negative": ["6", 0],
+      "latent_image": ["4", 0]
+    },
+    "class_type": "KSampler"
+  },
+  "11": {
+    "inputs": {
+      "samples": ["10", 0],
+      "vae": ["3", 0]
+    },
+    "class_type": "VAEDecode"
+  },
+  "12": {
+    "inputs": {
+      "filename_prefix": "kontext",
+      "file_type": "JPEG",
+      "remove_metadata": false,
+      "images": ["11", 0]
+    },
+    "class_type": "SaveImagePlus"
+  }
+}
