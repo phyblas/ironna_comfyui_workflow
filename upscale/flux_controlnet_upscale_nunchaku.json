@@ -1,0 +1,159 @@
+{
+  "1": {
+    "inputs": {
+      "clip_name1": "t5xxl_fp8_e4m3fn_scaled.safetensors",
+      "clip_name2": "ViT-L-14-BEST-smooth-GmP-TE-only-HF-format.safetensors",
+      "type": "flux",
+      "device": "default"
+    },
+    "class_type": "DualCLIPLoader"
+  },
+  "2": {
+    "inputs": {
+      "model_path": "svdq-fp4_r32-flux.1-krea-dev.safetensors",
+      "cache_threshold": 0,
+      "attention": "nunchaku-fp16",
+      "cpu_offload": "auto",
+      "device_id": 0,
+      "data_type": "bfloat16",
+      "i2f_mode": "enabled"
+    },
+    "class_type": "NunchakuFluxDiTLoader"
+  },
+  "3": {
+    "inputs": {
+      "vae_name": "ae.safetensors"
+    },
+    "class_type": "VAELoader"
+  },
+  "4": {
+    "inputs": {
+      "control_net_name": "Flux.1-dev-Controlnet-Upscaler_fp8.safetensors"
+    },
+    "class_type": "ControlNetLoader"
+  },
+  "5": {
+    "inputs": {
+      "model": "microsoft/Florence-2-base",
+      "precision": "bf16",
+      "attention": "sdpa",
+      "convert_to_safetensors": false
+    },
+    "class_type": "DownloadAndLoadFlorence2Model"
+  },
+  "6": {
+    "class_type": "LoadImage"
+  },
+  "7": {
+    "inputs": {
+      "text_input": "",
+      "task": "detailed_caption",
+      "fill_mask": true,
+      "keep_model_loaded": false,
+      "max_new_tokens": 1024,
+      "num_beams": 3,
+      "do_sample": true,
+      "output_mask_select": "",
+      "seed": 123456789,
+      "image": ["6", 0],
+      "florence2_model": ["5", 0]
+    },
+    "class_type": "Florence2Run"
+  },
+  "8": {
+    "inputs": {
+      "width": 1024,
+      "height": 1024,
+      "upscale_method": "lanczos",
+      "keep_proportion": "stretch",
+      "pad_color": "0, 0, 0",
+      "crop_position": "center",
+      "divisible_by": 8,
+      "device": "cpu",
+      "image": ["6", 0]
+    },
+    "class_type": "ImageResizeKJv2"
+  },
+  "9": {
+    "inputs": {
+      "text": ["7", 2],
+      "clip": ["1", 0]
+    },
+    "class_type": "CLIPTextEncode"
+  },
+  "10": {
+    "inputs": {
+      "width": ["8", 1],
+      "height": ["8", 2],
+      "batch_size": 1
+    },
+    "class_type": "EmptyLatentImage"
+  },
+  "11": {
+    "inputs": {
+      "strength": 0.9000000000000001,
+      "start_percent": 0,
+      "end_percent": 1,
+      "positive": ["9", 0],
+      "negative": ["9", 0],
+      "control_net": ["4", 0],
+      "image": ["8", 0],
+      "vae": ["3", 0]
+    },
+    "class_type": "ControlNetApplyAdvanced"
+  },
+  "12": {
+    "inputs": {
+      "guidance": 3.5,
+      "conditioning": ["11", 0]
+    },
+    "class_type": "FluxGuidance"
+  },
+  "13": {
+    "inputs": {
+      "seed": 123456789,
+      "steps": 20,
+      "cfg": 1,
+      "sampler_name": "euler",
+      "scheduler": "normal",
+      "denoise": 1,
+      "model": ["2", 0],
+      "positive": ["12", 0],
+      "negative": ["11", 1],
+      "latent_image": ["10", 0]
+    },
+    "class_type": "KSampler"
+  },
+  "14": {
+    "inputs": {
+      "samples": ["13", 0],
+      "vae": ["3", 0]
+    },
+    "class_type": "VAEDecode"
+  },
+  "15": {
+    "inputs": {
+      "method": "mkl",
+      "strength": 1.0000000000000002,
+      "image_ref": ["8", 0],
+      "image_target": ["14", 0]
+    },
+    "class_type": "ColorMatch"
+  },
+  "16": {
+    "inputs": {
+      "filename_prefix": "comfluxus",
+      "file_type": "JPEG",
+      "remove_metadata": false,
+      "images": ["15", 0]
+    },
+    "class_type": "SaveImagePlus"
+  },
+  "17": {
+    "inputs": {
+      "PreviewTextNode_0": "",
+      "text": ["7", 2]
+    },
+    "class_type": "PreviewTextNode"
+  }
+}
