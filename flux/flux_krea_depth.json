@@ -22,9 +22,6 @@
     "class_type": "VAELoader"
   },
   "4": {
-    "inputs": {
-      "image": "comflux_00070_.jpg"
-    },
     "class_type": "LoadImage"
   },
   "5": {
@@ -98,7 +95,7 @@
   },
   "12": {
     "inputs": {
-      "filename_prefix": "ComfyUI",
+      "filename_prefix": "comfdepth",
       "file_type": "JPEG",
       "remove_metadata": false,
       "images": ["11", 0]

@@ -126,7 +126,7 @@
   },
   "13": {
     "inputs": {
-      "filename_prefix": "comflux",
+      "filename_prefix": "comfdepth",
       "file_type": "JPEG",
       "remove_metadata": false,
       "images": ["12", 0]
