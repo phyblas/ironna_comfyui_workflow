@@ -1,0 +1,91 @@
+{
+  "1": {
+    "inputs": {
+      "clip_name": "qwen_2.5_vl_7b_fp8_scaled.safetensors",
+      "type": "qwen_image",
+      "device": "default"
+    },
+    "class_type": "CLIPLoader"
+  },
+  "2": {
+    "inputs": {
+      "unet_name": "qwen_image_fp8_e4m3fn.safetensors",
+      "weight_dtype": "default"
+    },
+    "class_type": "UNETLoader"
+  },
+  "3": {
+    "inputs": {
+      "vae_name": "qwen_image_vae.safetensors"
+    },
+    "class_type": "VAELoader"
+  },
+  "4": {
+    "inputs": {
+      "width": 1024,
+      "height": 1024,
+      "batch_size": 1
+    },
+    "class_type": "EmptySD3LatentImage"
+  },
+  "5": {
+    "inputs": {
+      "text": "粉红色双马尾的猫耳娘两手带着“猫耳最高です！”的木招牌",
+      "clip": ["1", 0]
+    },
+    "class_type": "CLIPTextEncode"
+  },
+  "6": {
+    "inputs": {
+      "text": "",
+      "clip": ["1", 0]
+    },
+    "class_type": "CLIPTextEncode"
+  },
+  "7": {
+    "inputs": {
+      "lora_name": "Qwen-Image-Lightning-8steps-V1.0.safetensors",
+      "strength_model": 1,
+      "model": ["2", 0]
+    },
+    "class_type": "LoraLoaderModelOnly"
+  },
+  "8": {
+    "inputs": {
+      "shift": 3.1000000000000005,
+      "model": ["7", 0]
+    },
+    "class_type": "ModelSamplingAuraFlow"
+  },
+  "9": {
+    "inputs": {
+      "seed": 123456789,
+      "steps": 8,
+      "cfg": 1,
+      "sampler_name": "euler",
+      "scheduler": "simple",
+      "denoise": 1,
+      "model": ["8", 0],
+      "positive": ["5", 0],
+      "negative": ["6", 0],
+      "latent_image": ["4", 0]
+    },
+    "class_type": "KSampler"
+  },
+  "10": {
+    "inputs": {
+      "samples": ["9", 0],
+      "vae": ["3", 0]
+    },
+    "class_type": "VAEDecode"
+  },
+  "11": {
+    "inputs": {
+      "filename_prefix": "comfqwen",
+      "file_type": "JPEG",
+      "remove_metadata": false,
+      "images": ["10", 0]
+    },
+    "class_type": "SaveImagePlus"
+  }
+}
