@@ -22,5 +22,9 @@ fp8的量化模型
 fp16的原本模型
 - [flux1-krea-dev](https://huggingface.co/black-forest-labs/FLUX.1-Krea-dev)
 
+### clip
+- [clip_l](https://huggingface.co/comfyanonymous/flux_text_encoders/blob/main/clip_l.safetensors)
+- [t5xxl_fp8_e4m3fn_scaled](https://huggingface.co/comfyanonymous/flux_text_encoders/blob/main/t5xxl_fp8_e4m3fn_scaled.safetensors)
+
 ### lora
 - [flux1-depth-dev-lora](https://huggingface.co/black-forest-labs/FLUX.1-Depth-dev-lora/tree/main)

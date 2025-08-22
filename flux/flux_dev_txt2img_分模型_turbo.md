@@ -21,3 +21,10 @@ fp16的原本模型
 
 ### lora
 - [FLUX.1-Turbo-Alpha]（https://civitai.com/models/876388/flux1-turbo-alpha）
+
+### clip
+- [clip_l](https://huggingface.co/comfyanonymous/flux_text_encoders/blob/main/clip_l.safetensors)
+- [t5xxl_fp8_e4m3fn_scaled](https://huggingface.co/comfyanonymous/flux_text_encoders/blob/main/t5xxl_fp8_e4m3fn_scaled.safetensors)
+
+### vae
+- [ae](https://huggingface.co/Comfy-Org/Lumina_Image_2.0_Repackaged/blob/main/split_files/vae/ae.safetensors)

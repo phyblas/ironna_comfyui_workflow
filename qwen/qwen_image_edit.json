@@ -1,0 +1,104 @@
+{
+  "1": {
+    "inputs": {
+      "clip_name": "qwen_2.5_vl_7b_fp8_scaled.safetensors",
+      "type": "qwen_image",
+      "device": "default"
+    },
+    "class_type": "CLIPLoader"
+  },
+  "2": {
+    "inputs": {
+      "unet_name": "qwen_image_edit_fp8_e4m3fn.safetensors",
+      "weight_dtype": "default"
+    },
+    "class_type": "UNETLoader"
+  },
+  "3": {
+    "inputs": {
+      "vae_name": "qwen_image_vae.safetensors"
+    },
+    "class_type": "VAELoader"
+  },
+  "4": {
+    "class_type": "LoadImage"
+  },
+  "5": {
+    "inputs": {
+      "lora_name": "Qwen-Image-Lightning-4steps-V1.0.safetensors",
+      "strength_model": 1,
+      "model": ["2", 0]
+    },
+    "class_type": "LoraLoaderModelOnly"
+  },
+  "6": {
+    "inputs": {
+      "prompt": "获得正视视角",
+      "clip": ["1", 0],
+      "vae": ["3", 0],
+      "image": ["4", 0]
+    },
+    "class_type": "TextEncodeQwenImageEdit"
+  },
+  "7": {
+    "inputs": {
+      "prompt": "",
+      "clip": ["1", 0],
+      "vae": ["3", 0],
+      "image": ["4", 0]
+    },
+    "class_type": "TextEncodeQwenImageEdit"
+  },
+  "8": {
+    "inputs": {
+      "pixels": ["4", 0],
+      "vae": ["3", 0]
+    },
+    "class_type": "VAEEncode"
+  },
+  "9": {
+    "inputs": {
+      "shift": 3,
+      "model": ["5", 0]
+    },
+    "class_type": "ModelSamplingAuraFlow"
+  },
+  "10": {
+    "inputs": {
+      "strength": 1,
+      "model": ["9", 0]
+    },
+    "class_type": "CFGNorm"
+  },
+  "11": {
+    "inputs": {
+      "seed": 123456789,
+      "steps": 4,
+      "cfg": 1,
+      "sampler_name": "euler",
+      "scheduler": "simple",
+      "denoise": 1,
+      "model": ["10", 0],
+      "positive": ["6", 0],
+      "negative": ["7", 0],
+      "latent_image": ["8", 0]
+    },
+    "class_type": "KSampler"
+  },
+  "12": {
+    "inputs": {
+      "samples": ["11", 0],
+      "vae": ["3", 0]
+    },
+    "class_type": "VAEDecode"
+  },
+  "13": {
+    "inputs": {
+      "filename_prefix": "comfqwen",
+      "file_type": "JPEG",
+      "remove_metadata": false,
+      "images": ["12", 0]
+    },
+    "class_type": "SaveImagePlus"
+  }
+}

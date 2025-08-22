@@ -19,7 +19,7 @@
 ### unet
 - [flux1-schnell-Q4_K_S](https://huggingface.co/city96/FLUX.1-schnell-gguf/blob/main/flux1-schnell-Q4_K_S.gguf)
 
-### clip_vision
+### clip
 - [clip_l](https://huggingface.co/comfyanonymous/flux_text_encoders/blob/main/clip_l.safetensors)
 - [t5-v1_1-xxl-encoder-Q4_K_S](https://huggingface.co/city96/t5-v1_1-xxl-encoder-gguf/blob/main/t5-v1_1-xxl-encoder-Q4_K_S.gguf)
 
