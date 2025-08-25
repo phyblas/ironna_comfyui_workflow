@@ -44,7 +44,7 @@
   },
   "7": {
     "inputs": {
-      "lora_name": "Qwen-Image-Lightning-8steps-V1.0.safetensors",
+      "lora_name": "Qwen-Image-Lightning-4steps-V1.0.safetensors",
       "strength_model": 1,
       "model": ["2", 0]
     },
@@ -60,7 +60,7 @@
   "9": {
     "inputs": {
       "seed": 123456789,
-      "steps": 8,
+      "steps": 4,
       "cfg": 1,
       "sampler_name": "euler",
       "scheduler": "simple",
