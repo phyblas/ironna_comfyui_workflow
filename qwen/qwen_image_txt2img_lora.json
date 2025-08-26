@@ -44,39 +44,47 @@
   },
   "7": {
     "inputs": {
-      "shift": 3.1,
+      "lora_name": "Qwen-Image-Lightning-8steps-V1.0.safetensors",
+      "strength_model": 1,
       "model": ["2", 0]
     },
-    "class_type": "ModelSamplingAuraFlow"
+    "class_type": "LoraLoaderModelOnly"
   },
   "8": {
     "inputs": {
+      "shift": 3.1000000000000005,
+      "model": ["7", 0]
+    },
+    "class_type": "ModelSamplingAuraFlow"
+  },
+  "9": {
+    "inputs": {
       "seed": 123456789,
-      "steps": 20,
-      "cfg": 2.5,
+      "steps": 8,
+      "cfg": 1,
       "sampler_name": "euler",
       "scheduler": "simple",
       "denoise": 1,
-      "model": ["7", 0],
+      "model": ["8", 0],
       "positive": ["5", 0],
       "negative": ["6", 0],
       "latent_image": ["4", 0]
     },
     "class_type": "KSampler"
   },
-  "9": {
+  "10": {
     "inputs": {
-      "samples": ["8", 0],
+      "samples": ["9", 0],
       "vae": ["3", 0]
     },
     "class_type": "VAEDecode"
   },
-  "10": {
+  "11": {
     "inputs": {
       "filename_prefix": "comfqwen",
       "file_type": "JPEG",
       "remove_metadata": false,
-      "images": ["9", 0]
+      "images": ["10", 0]
     },
     "class_type": "SaveImagePlus"
   }
