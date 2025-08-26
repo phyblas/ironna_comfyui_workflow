@@ -1,0 +1,145 @@
+{
+  "1": {
+    "inputs": {
+      "clip_name": "umt5_xxl_fp8_e4m3fn_scaled.safetensors",
+      "type": "wan",
+      "device": "default"
+    },
+    "class_type": "CLIPLoader"
+  },
+  "2": {
+    "inputs": {
+      "unet_name": "wan2.2_t2v_low_noise_14B_fp8_scaled.safetensors",
+      "weight_dtype": "default"
+    },
+    "class_type": "UNETLoader"
+  },
+  "3": {
+    "inputs": {
+      "vae_name": "wan_2.1_vae.safetensors"
+    },
+    "class_type": "VAELoader"
+  },
+  "4": {
+    "inputs": {
+      "model": "gokaygokay/Florence-2-Flux-Large",
+      "precision": "fp16",
+      "attention": "sdpa",
+      "device": "cuda:0"
+    },
+    "class_type": "DownloadAndLoadFlorence2ModelMultiGPU"
+  },
+  "5": {
+    "inputs": {
+      "image": "kdm_01474_.jpg"
+    },
+    "class_type": "LoadImage"
+  },
+  "6": {
+    "inputs": {
+      "lora_name": "wan2.2_t2v_lightx2v_4steps_lora_v1.1_low_noise.safetensors",
+      "strength_model": 1,
+      "model": ["2", 0]
+    },
+    "class_type": "LoraLoaderModelOnly"
+  },
+  "7": {
+    "inputs": {
+      "text_input": "",
+      "task": "more_detailed_caption",
+      "fill_mask": true,
+      "keep_model_loaded": false,
+      "max_new_tokens": 1024,
+      "num_beams": 3,
+      "do_sample": true,
+      "output_mask_select": "",
+      "seed": 356852895699598,
+      "image": ["5", 0],
+      "florence2_model": ["4", 0]
+    },
+    "class_type": "Florence2Run"
+  },
+  "8": {
+    "inputs": {
+      "text": "色调艳丽，过曝，细节模糊不清，整体发灰，最差质量，低质量，JPEG压缩残留，丑陋的，残缺的，多余的手指，画得不好的手部，画得不好的脸部，畸形的，毁容的，形态畸形的肢体，手指融合，三条腿",
+      "clip": ["1", 0]
+    },
+    "class_type": "CLIPTextEncode"
+  },
+  "9": {
+    "inputs": {
+      "pixels": ["5", 0],
+      "vae": ["3", 0]
+    },
+    "class_type": "VAEEncode"
+  },
+  "10": {
+    "inputs": {
+      "text": ["7", 2],
+      "clip": ["1", 0]
+    },
+    "class_type": "CLIPTextEncode"
+  },
+  "11": {
+    "inputs": {
+      "backend": "inductor",
+      "fullgraph": false,
+      "mode": "default",
+      "dynamic": false,
+      "compile_transformer_blocks_only": false,
+      "dynamo_cache_size_limit": 64,
+      "model": ["6", 0]
+    },
+    "class_type": "TorchCompileModelWanVideoV2"
+  },
+  "12": {
+    "inputs": {
+      "upscale_method": "nearest-exact",
+      "scale_by": 1.5,
+      "samples": ["9", 0]
+    },
+    "class_type": "LatentUpscaleBy"
+  },
+  "13": {
+    "inputs": {
+      "shift": 8,
+      "model": ["11", 0]
+    },
+    "class_type": "ModelSamplingSD3"
+  },
+  "14": {
+    "inputs": {
+      "eta": 0.5,
+      "sampler_name": "res_2s",
+      "scheduler": "beta57",
+      "steps": 4,
+      "steps_to_run": -1,
+      "denoise": 0.3,
+      "cfg": 1,
+      "seed": 314784648142393,
+      "sampler_mode": "standard",
+      "bongmath": true,
+      "model": ["13", 0],
+      "positive": ["10", 0],
+      "negative": ["8", 0],
+      "latent_image": ["12", 0]
+    },
+    "class_type": "ClownsharKSampler_Beta"
+  },
+  "15": {
+    "inputs": {
+      "samples": ["14", 0],
+      "vae": ["3", 0]
+    },
+    "class_type": "VAEDecode"
+  },
+  "16": {
+    "inputs": {
+      "filename_prefix": "comfwan",
+      "file_type": "JPEG",
+      "remove_metadata": false,
+      "images": ["15", 0]
+    },
+    "class_type": "SaveImagePlus"
+  }
+}
