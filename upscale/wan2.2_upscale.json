@@ -30,9 +30,6 @@
     "class_type": "DownloadAndLoadFlorence2ModelMultiGPU"
   },
   "5": {
-    "inputs": {
-      "image": "kdm_01474_.jpg"
-    },
     "class_type": "LoadImage"
   },
   "6": {
