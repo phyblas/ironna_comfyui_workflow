@@ -2,11 +2,6 @@
 
 用wan2.2来做视频。输入是最开始和最终的图片2张。
 
-# 需要插件
-
-- [Goktug / comfyui-saveimage-plus](https://github.com/Goktug/comfyui-saveimage-plus)
-- - SaveImagePlus
-
 # 需要模型
 
 ### unet
