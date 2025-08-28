@@ -1,0 +1,139 @@
+{
+  "1": {
+    "inputs": {
+      "clip_name": "qwen_2.5_vl_7b_fp8_scaled.safetensors",
+      "type": "qwen_image",
+      "device": "default"
+    },
+    "class_type": "CLIPLoader"
+  },
+  "2": {
+    "inputs": {
+      "model_name": "svdq-fp4_r128-qwen-image-lightningv1.0-4steps.safetensors"
+    },
+    "class_type": "NunchakuQwenImageDiTLoader"
+  },
+  "3": {
+    "inputs": {
+      "vae_name": "qwen_image_vae.safetensors"
+    },
+    "class_type": "VAELoader"
+  },
+  "4": {
+    "inputs": {
+      "width": 1024,
+      "height": 1024,
+      "batch_size": 1
+    },
+    "class_type": "EmptySD3LatentImage"
+  },
+  "5": {
+    "inputs": {
+      "model": "gokaygokay/Florence-2-Flux-Large",
+      "precision": "fp16",
+      "attention": "sdpa",
+      "convert_to_safetensors": false
+    },
+    "class_type": "DownloadAndLoadFlorence2Model"
+  },
+  "6": {
+    "class_type": "LoadImage"
+  },
+  "7": {
+    "inputs": {
+      "text": "下雪"
+    },
+    "class_type": "ttN text"
+  },
+  "8": {
+    "inputs": {
+      "lora_name": "Qwen-Image-Lightning-4steps-V1.0.safetensors",
+      "strength_model": 1,
+      "model": ["2", 0]
+    },
+    "class_type": "LoraLoaderModelOnly"
+  },
+  "9": {
+    "inputs": {
+      "text_input": "",
+      "task": "more_detailed_caption",
+      "fill_mask": true,
+      "keep_model_loaded": false,
+      "max_new_tokens": 1024,
+      "num_beams": 3,
+      "do_sample": true,
+      "output_mask_select": "",
+      "seed": 123456789,
+      "image": ["6", 0],
+      "florence2_model": ["5", 0]
+    },
+    "class_type": "Florence2Run"
+  },
+  "10": {
+    "inputs": {
+      "text": "",
+      "clip": ["1", 0]
+    },
+    "class_type": "CLIPTextEncode"
+  },
+  "11": {
+    "inputs": {
+      "shift": 3.1,
+      "model": ["8", 0]
+    },
+    "class_type": "ModelSamplingAuraFlow"
+  },
+  "12": {
+    "inputs": {
+      "delimiter": " ",
+      "string1": ["9", 2],
+      "string2": ["7", 0]
+    },
+    "class_type": "JoinStrings"
+  },
+  "13": {
+    "inputs": {
+      "text": ["12", 0],
+      "clip": ["1", 0]
+    },
+    "class_type": "CLIPTextEncode"
+  },
+  "14": {
+    "inputs": {
+      "seed": 123456789,
+      "steps": 4,
+      "cfg": 1,
+      "sampler_name": "euler",
+      "scheduler": "simple",
+      "denoise": 1,
+      "model": ["11", 0],
+      "positive": ["13", 0],
+      "negative": ["10", 0],
+      "latent_image": ["4", 0]
+    },
+    "class_type": "KSampler"
+  },
+  "15": {
+    "inputs": {
+      "samples": ["14", 0],
+      "vae": ["3", 0]
+    },
+    "class_type": "VAEDecode"
+  },
+  "16": {
+    "inputs": {
+      "filename_prefix": "comfqwen",
+      "file_type": "JPEG",
+      "remove_metadata": false,
+      "images": ["15", 0]
+    },
+    "class_type": "SaveImagePlus"
+  },
+  "17": {
+    "inputs": {
+      "PreviewTextNode_0": "The image is an underwater illustration of a young woman with long blue hair. She is wearing a white top with a ruffled neckline and a green skirt with white ruffles. Her hair is styled in loose waves and cascades down her back. She has a small white flower in her hair, adding a touch of elegance to her look. The background is a deep blue ocean with small bubbles floating around her. On the left side of the image, there is a rocky shoreline with orange fish swimming around. The overall mood of the illustration is peaceful and serene. 下雪",
+      "text": ["12", 0]
+    },
+    "class_type": "PreviewTextNode"
+  }
+}
