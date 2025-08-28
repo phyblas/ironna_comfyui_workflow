@@ -25,9 +25,9 @@
       "model": "gokaygokay/Florence-2-Flux-Large",
       "precision": "fp16",
       "attention": "sdpa",
-      "device": "cuda:0"
+      "convert_to_safetensors": false
     },
-    "class_type": "DownloadAndLoadFlorence2ModelMultiGPU"
+    "class_type": "DownloadAndLoadFlorence2Model"
   },
   "5": {
     "class_type": "LoadImage"

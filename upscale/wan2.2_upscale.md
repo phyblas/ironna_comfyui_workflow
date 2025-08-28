@@ -8,7 +8,7 @@
 - - NunchakuFluxDiTLoader
 
 - [kijai / ComfyUI-Florence2](https://github.com/kijai/ComfyUI-Florence2)
-- - DownloadAndLoadFlorence2ModelMultiGPU
+- - DownloadAndLoadFlorence2Model
 - - Florence2Run
 
 - [ClownsharkBatwing / RES4LYF](https://github.com/ClownsharkBatwing/RES4LYF)

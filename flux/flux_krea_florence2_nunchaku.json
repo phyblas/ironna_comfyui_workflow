@@ -1,0 +1,142 @@
+{
+  "1": {
+    "inputs": {
+      "clip_name1": "clip_l.safetensors",
+      "clip_name2": "t5xxl_fp8_e4m3fn_scaled.safetensors",
+      "type": "flux",
+      "device": "default"
+    },
+    "class_type": "DualCLIPLoader"
+  },
+  "2": {
+    "inputs": {
+      "model_path": "svdq-fp4_r32-flux.1-krea-dev.safetensors",
+      "cache_threshold": 0,
+      "attention": "nunchaku-fp16",
+      "cpu_offload": "auto",
+      "device_id": 0,
+      "data_type": "bfloat16",
+      "i2f_mode": "enabled"
+    },
+    "class_type": "NunchakuFluxDiTLoader"
+  },
+  "3": {
+    "inputs": {
+      "vae_name": "ae.safetensors"
+    },
+    "class_type": "VAELoader"
+  },
+  "4": {
+    "inputs": {
+      "model": "gokaygokay/Florence-2-Flux-Large",
+      "precision": "fp16",
+      "attention": "sdpa",
+      "convert_to_safetensors": false
+    },
+    "class_type": "DownloadAndLoadFlorence2Model"
+  },
+  "5": {
+    "inputs": {
+      "width": 1024,
+      "height": 1024,
+      "batch_size": 1
+    },
+    "class_type": "EmptySD3LatentImage"
+  },
+  "6": {
+    "inputs": {
+      "image": "comfqwen_00119_.jpg"
+    },
+    "class_type": "LoadImage"
+  },
+  "7": {
+    "inputs": {
+      "from_translate": "auto",
+      "to_translate": "english",
+      "add_proxies": false,
+      "proxies": "",
+      "auth_data": "",
+      "service": "GoogleTranslator",
+      "text": "下雪",
+      "Show proxy": "proxy_hide",
+      "Show authorization": "authorization_hide"
+    },
+    "class_type": "DeepTranslatorTextNode"
+  },
+  "8": {
+    "inputs": {
+      "text_input": "",
+      "task": "more_detailed_caption",
+      "fill_mask": true,
+      "keep_model_loaded": false,
+      "max_new_tokens": 1024,
+      "num_beams": 3,
+      "do_sample": true,
+      "output_mask_select": "",
+      "seed": 123456789,
+      "image": ["6", 0],
+      "florence2_model": ["4", 0]
+    },
+    "class_type": "Florence2Run"
+  },
+  "9": {
+    "inputs": {
+      "delimiter": " ",
+      "string1": ["8", 2],
+      "string2": ["7", 0]
+    },
+    "class_type": "JoinStrings"
+  },
+  "10": {
+    "inputs": {
+      "text": ["9", 0],
+      "clip": ["1", 0]
+    },
+    "class_type": "CLIPTextEncode"
+  },
+  "11": {
+    "inputs": {
+      "guidance": 3.5,
+      "conditioning": ["10", 0]
+    },
+    "class_type": "FluxGuidance"
+  },
+  "12": {
+    "inputs": {
+      "seed": 466067562220737,
+      "steps": 20,
+      "cfg": 1,
+      "sampler_name": "euler",
+      "scheduler": "simple",
+      "denoise": 1,
+      "model": ["2", 0],
+      "positive": ["11", 0],
+      "negative": ["10", 0],
+      "latent_image": ["5", 0]
+    },
+    "class_type": "KSampler"
+  },
+  "13": {
+    "inputs": {
+      "samples": ["12", 0],
+      "vae": ["3", 0]
+    },
+    "class_type": "VAEDecode"
+  },
+  "14": {
+    "inputs": {
+      "filename_prefix": "comflux",
+      "file_type": "JPEG",
+      "remove_metadata": false,
+      "images": ["13", 0]
+    },
+    "class_type": "SaveImagePlus"
+  },
+  "15": {
+    "inputs": {
+      "PreviewTextNode_0": "",
+      "text": ["8", 2]
+    },
+    "class_type": "PreviewTextNode"
+  }
+}
