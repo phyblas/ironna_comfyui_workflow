@@ -1,6 +1,6 @@
 # 简单说明
 
-用flux kontext dev来修改1张图片。还有用nunchaku模型来加速。
+用flux kontext dev来修改图片。用遮罩来限制要改的部分。还有用nunchaku模型来加速。
 
 # 需要插件
 
@@ -9,6 +9,9 @@
 
 - [AlekPet / ComfyUI_Custom_Nodes_AlekPet](https://github.com/AlekPet/ComfyUI_Custom_Nodes_AlekPet)
 - - DeepTranslatorCLIPTextEncodeNode
+
+- [ZenAI-Vietnam / ComfyUI-Kontext-Inpainting](https://github.com/ZenAI-Vietnam/ComfyUI-Kontext-Inpainting)
+- - Kontext Inpainting Conditioning
 
 - [Goktug / comfyui-saveimage-plus](https://github.com/Goktug/comfyui-saveimage-plus)
 - - SaveImagePlus

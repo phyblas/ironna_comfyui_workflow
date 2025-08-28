@@ -1,14 +1,14 @@
 # 简单说明
 
-用flux kontext dev来修改1张图片。还有用nunchaku模型来加速。
+用flux kontext dev来修改图片。用遮罩来限制要改的部分。
 
 # 需要插件
 
-- [nunchaku.tech / ComfyUI-nunchaku](https://github.com/nunchaku-tech/ComfyUI-nunchaku)
-- - NunchakuFluxDiTLoader
-
 - [AlekPet / ComfyUI_Custom_Nodes_AlekPet](https://github.com/AlekPet/ComfyUI_Custom_Nodes_AlekPet)
 - - DeepTranslatorCLIPTextEncodeNode
+
+- [ZenAI-Vietnam / ComfyUI-Kontext-Inpainting](https://github.com/ZenAI-Vietnam/ComfyUI-Kontext-Inpainting)
+- - Kontext Inpainting Conditioning
 
 - [Goktug / comfyui-saveimage-plus](https://github.com/Goktug/comfyui-saveimage-plus)
 - - SaveImagePlus
@@ -16,7 +16,11 @@
 # 需要模型
 
 ### unet
-- [svdq-fp4_r32-flux.1-kontext-dev](https://huggingface.co/nunchaku-tech/nunchaku-flux.1-kontext-dev/tree/main)
+fp8的量化模型
+- [flux1-dev-kontext_fp8_scaled](https://huggingface.co/Comfy-Org/flux1-kontext-dev_ComfyUI/blob/main/split_files/diffusion_models/flux1-dev-kontext_fp8_scaled.safetensors)
+
+fp16的原本模型
+- [flux1-kontext-dev](https://huggingface.co/black-forest-labs/FLUX.1-Kontext-dev/tree/main)
 
 ### clip
 - [clip_l](https://huggingface.co/comfyanonymous/flux_text_encoders/blob/main/clip_l.safetensors)

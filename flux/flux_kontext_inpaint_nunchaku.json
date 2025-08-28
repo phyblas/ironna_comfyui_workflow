@@ -1,0 +1,95 @@
+{
+  "1": {
+    "inputs": {
+      "clip_name1": "t5xxl_fp8_e4m3fn_scaled.safetensors",
+      "clip_name2": "clip_l.safetensors",
+      "type": "flux",
+      "device": "default"
+    },
+    "class_type": "DualCLIPLoader"
+  },
+  "2": {
+    "inputs": {
+      "model_path": "svdq-fp4_r32-flux.1-kontext-dev.safetensors",
+      "cache_threshold": 0,
+      "attention": "nunchaku-fp16",
+      "cpu_offload": "auto",
+      "device_id": 0,
+      "data_type": "bfloat16",
+      "i2f_mode": "enabled"
+    },
+    "class_type": "NunchakuFluxDiTLoader"
+  },
+  "3": {
+    "inputs": {
+      "vae_name": "ae.safetensors"
+    },
+    "class_type": "VAELoader"
+  },
+  "4": {
+    "class_type": "LoadImage"
+  },
+  "5": {
+    "inputs": {
+      "from_translate": "auto",
+      "to_translate": "english",
+      "add_proxies": false,
+      "proxies": "",
+      "auth_data": "",
+      "service": "GoogleTranslator",
+      "text": "把裙子改成粉红色",
+      "Show proxy": "proxy_hide",
+      "Show authorization": "authorization_hide",
+      "clip": ["1", 0]
+    },
+    "class_type": "DeepTranslatorCLIPTextEncodeNode"
+  },
+  "6": {
+    "inputs": {
+      "guidance": 2.5,
+      "conditioning": ["5", 0]
+    },
+    "class_type": "FluxGuidance"
+  },
+  "7": {
+    "inputs": {
+      "noise_mask": true,
+      "conditioning": ["6", 0],
+      "vae": ["3", 0],
+      "pixels": ["4", 0],
+      "mask": ["4", 1]
+    },
+    "class_type": "Kontext Inpainting Conditioning"
+  },
+  "8": {
+    "inputs": {
+      "seed": 123456789,
+      "steps": 20,
+      "cfg": 1,
+      "sampler_name": "euler",
+      "scheduler": "simple",
+      "denoise": 1,
+      "model": ["2", 0],
+      "positive": ["7", 0],
+      "negative": ["6", 0],
+      "latent_image": ["7", 1]
+    },
+    "class_type": "KSampler"
+  },
+  "9": {
+    "inputs": {
+      "samples": ["8", 0],
+      "vae": ["3", 0]
+    },
+    "class_type": "VAEDecode"
+  },
+  "10": {
+    "inputs": {
+      "filename_prefix": "kontext",
+      "file_type": "JPEG",
+      "remove_metadata": false,
+      "images": ["9", 0]
+    },
+    "class_type": "SaveImagePlus"
+  }
+}

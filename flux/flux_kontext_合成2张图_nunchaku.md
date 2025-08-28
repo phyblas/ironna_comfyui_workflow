@@ -16,8 +16,7 @@
 # 需要模型
 
 ### unet
-fp8的量化模型
-- [svdq-fp4_r32-flux.1-kontext-dev或svdq-int4_r32-flux.1-kontext-dev](https://huggingface.co/nunchaku-tech/nunchaku-flux.1-kontext-dev/tree/main)
+- [svdq-fp4_r32-flux.1-kontext-dev](https://huggingface.co/nunchaku-tech/nunchaku-flux.1-kontext-dev/tree/main)
 
 ### clip
 - [clip_l](https://huggingface.co/comfyanonymous/flux_text_encoders/blob/main/clip_l.safetensors)
