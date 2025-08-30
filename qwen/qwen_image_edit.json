@@ -35,40 +35,36 @@
     "inputs": {
       "prompt": "获得正视视角",
       "clip": ["1", 0],
-      "vae": ["3", 0],
       "image": ["4", 0]
     },
     "class_type": "TextEncodeQwenImageEdit"
   },
   "7": {
     "inputs": {
-      "prompt": "",
-      "clip": ["1", 0],
-      "vae": ["3", 0],
-      "image": ["4", 0]
-    },
-    "class_type": "TextEncodeQwenImageEdit"
-  },
-  "8": {
-    "inputs": {
       "pixels": ["4", 0],
       "vae": ["3", 0]
     },
     "class_type": "VAEEncode"
   },
-  "9": {
+  "8": {
     "inputs": {
       "shift": 3,
       "model": ["5", 0]
     },
     "class_type": "ModelSamplingAuraFlow"
   },
+  "9": {
+    "inputs": {
+      "conditioning": ["6", 0],
+      "latent": ["7", 0]
+    },
+    "class_type": "ReferenceLatent"
+  },
   "10": {
     "inputs": {
-      "strength": 1,
-      "model": ["9", 0]
+      "conditioning": ["6", 0]
     },
-    "class_type": "CFGNorm"
+    "class_type": "ConditioningZeroOut"
   },
   "11": {
     "inputs": {
@@ -78,10 +74,10 @@
       "sampler_name": "euler",
       "scheduler": "simple",
       "denoise": 1,
-      "model": ["10", 0],
-      "positive": ["6", 0],
-      "negative": ["7", 0],
-      "latent_image": ["8", 0]
+      "model": ["8", 0],
+      "positive": ["9", 0],
+      "negative": ["10", 0],
+      "latent_image": ["7", 0]
     },
     "class_type": "KSampler"
   },
