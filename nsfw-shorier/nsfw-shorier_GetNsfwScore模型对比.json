@@ -1,0 +1,109 @@
+{
+  "1": {
+    "class_type": "LoadImage"
+  },
+  "2": {
+    "inputs": {
+      "model_name": "compvis",
+      "image": ["1", 0]
+    },
+    "class_type": "GetNsfwScore"
+  },
+  "3": {
+    "inputs": {
+      "model_name": "falconsai",
+      "image": ["1", 0]
+    },
+    "class_type": "GetNsfwScore"
+  },
+  "4": {
+    "inputs": {
+      "model_name": "adamcodd",
+      "image": ["1", 0]
+    },
+    "class_type": "GetNsfwScore"
+  },
+  "5": {
+    "inputs": {
+      "model_name": "umairrkhn",
+      "image": ["1", 0]
+    },
+    "class_type": "GetNsfwScore"
+  },
+  "6": {
+    "inputs": {
+      "model_name": "marqo",
+      "image": ["1", 0]
+    },
+    "class_type": "GetNsfwScore"
+  },
+  "7": {
+    "inputs": {
+      "model_name": "gantman",
+      "image": ["1", 0]
+    },
+    "class_type": "GetNsfwScore"
+  },
+  "8": {
+    "inputs": {
+      "model_name": "nudenet (320)",
+      "image": ["1", 0]
+    },
+    "class_type": "GetNsfwScore"
+  },
+  "9": {
+    "inputs": {
+      "model_name": "nudenet (640)",
+      "image": ["1", 0]
+    },
+    "class_type": "GetNsfwScore"
+  },
+  "10": {
+    "inputs": {
+      "source": ["2", 0]
+    },
+    "class_type": "PreviewAny"
+  },
+  "11": {
+    "inputs": {
+      "source": ["3", 0]
+    },
+    "class_type": "PreviewAny"
+  },
+  "12": {
+    "inputs": {
+      "source": ["4", 0]
+    },
+    "class_type": "PreviewAny"
+  },
+  "13": {
+    "inputs": {
+      "source": ["5", 0]
+    },
+    "class_type": "PreviewAny"
+  },
+  "14": {
+    "inputs": {
+      "source": ["6", 0]
+    },
+    "class_type": "PreviewAny"
+  },
+  "15": {
+    "inputs": {
+      "source": ["7", 0]
+    },
+    "class_type": "PreviewAny"
+  },
+  "16": {
+    "inputs": {
+      "source": ["8", 0]
+    },
+    "class_type": "PreviewAny"
+  },
+  "17": {
+    "inputs": {
+      "source": ["9", 0]
+    },
+    "class_type": "PreviewAny"
+  }
+}
