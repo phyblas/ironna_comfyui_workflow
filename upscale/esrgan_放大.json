@@ -6,6 +6,7 @@
     "class_type": "UpscaleModelLoader"
   },
   "2": {
+    "inputs": {},
     "class_type": "LoadImage"
   },
   "3": {

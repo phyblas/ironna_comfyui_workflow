@@ -39,6 +39,7 @@
     "class_type": "EmptySD3LatentImage"
   },
   "6": {
+    "inputs": {},
     "class_type": "LoadImage"
   },
   "7": {

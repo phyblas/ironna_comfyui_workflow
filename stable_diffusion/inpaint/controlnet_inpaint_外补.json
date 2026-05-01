@@ -12,6 +12,7 @@
     "class_type": "ControlNetLoader"
   },
   "3": {
+    "inputs": {},
     "class_type": "LoadImage"
   },
   "4": {

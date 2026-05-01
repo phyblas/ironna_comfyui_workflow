@@ -30,6 +30,7 @@
     "class_type": "DownloadAndLoadFlorence2Model"
   },
   "5": {
+    "inputs": {},
     "class_type": "LoadImage"
   },
   "6": {

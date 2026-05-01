@@ -56,9 +56,11 @@
     "class_type": "ControlNetLoader"
   },
   "7": {
+    "inputs": {},
     "class_type": "LoadImage"
   },
   "8": {
+    "inputs": {},
     "class_type": "LoadImage"
   },
   "9": {

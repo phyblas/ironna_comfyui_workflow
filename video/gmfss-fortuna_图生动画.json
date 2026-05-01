@@ -1,8 +1,10 @@
 {
   "1": {
+    "inputs": {},
     "class_type": "LoadImage"
   },
   "2": {
+    "inputs": {},
     "class_type": "LoadImage"
   },
   "3": {

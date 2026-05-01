@@ -26,6 +26,7 @@
     "class_type": "CLIPVisionLoader"
   },
   "5": {
+    "inputs": {},
     "class_type": "LoadImage"
   },
   "6": {

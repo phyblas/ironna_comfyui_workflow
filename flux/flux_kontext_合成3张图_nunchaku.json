@@ -35,12 +35,15 @@
     "class_type": "EmptyLatentImage"
   },
   "5": {
+    "inputs": {},
     "class_type": "LoadImage"
   },
   "6": {
+    "inputs": {},
     "class_type": "LoadImage"
   },
   "7": {
+    "inputs": {},
     "class_type": "LoadImage"
   },
   "8": {
